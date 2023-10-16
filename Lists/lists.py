@@ -95,3 +95,11 @@ consonants = [item*2 if is_consonant(item) else " " for item in sentence]
 print(f"consonants from sentence is {consonants}")
 consonants = [is_consonant(item) for item in sentence]
 print(f"consonants from sentence is {consonants}")
+
+data =  [[[1, 2], [3, 4]], [[5, 6], [7, 8]]]
+print(data[0])
+
+list1 = ["a","b"]
+list2 = ["c","d"]
+
+print((list1,list2))
