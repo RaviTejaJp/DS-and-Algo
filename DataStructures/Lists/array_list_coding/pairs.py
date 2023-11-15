@@ -1,3 +1,6 @@
+from __future__ import annotations
+
+
 def pair_sum(myList, sum):
     seen_compliment = {}
     result = []
@@ -12,6 +15,7 @@ def pair_sum(myList, sum):
                 result.append(f'{item}+{compliment}')
     return result
 
+
 def pair_sum2(myList, sum):
     result = []
     for index, item in enumerate(myList):
@@ -23,8 +27,7 @@ def pair_sum2(myList, sum):
     return result
 
 
-
-result = pair_sum([2, 4, 3, 5, 6, -2, 4, 7, 8, 9],7)
+result = pair_sum([2, 4, 3, 5, 6, -2, 4, 7, 8, 9], 7)
 print(result)
-result = pair_sum2([2, 4, 3, 5, 6, -2, 4, 7, 8, 9],7)
+result = pair_sum2([2, 4, 3, 5, 6, -2, 4, 7, 8, 9], 7)
 print(result)
