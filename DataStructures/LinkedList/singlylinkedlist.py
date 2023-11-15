@@ -13,7 +13,25 @@ __all__ = ['SinglyLinkedList']
 
 
 class SinglyLinkedList:
-    """Singly Linked List implementation
+    """_summary_
+
+    Raises:
+        TypeError: _description_
+        TypeError: _description_
+        TypeError: _description_
+        TypeError: _description_
+        NotImplementedError: _description_
+        TypeError: _description_
+        TypeError: _description_
+        IndexError: _description_
+        TypeError: _description_
+        TypeError: _description_
+
+    Returns:
+        _type_: _description_
+
+    Yields:
+        _type_: _description_
     """
     __slots__ = ['head', 'tail', 'length']
 
@@ -147,19 +165,6 @@ class SinglyLinkedList:
                 current = current.next
         return return_value
 
-    def search(self, data: Any) -> bool:
-        return_value = False
-        if isinstance(data, SinglyLinkedListNode):
-            return_value = self.search_node(node=data, match_next=False)
-        else:
-            current = self.head
-            while current is not None:
-                if current.data == data:
-                    return_value = True
-                    break
-                current = current.next
-        return return_value
-
     def prepend_node(self, node: SinglyLinkedListNode) -> None:
         if isinstance(node, SinglyLinkedListNode):
             if node.next is not None:
@@ -181,9 +186,50 @@ class SinglyLinkedList:
                 f'but we got {type(node)}',
             )
 
+    def prepend(self, data: Any) -> None:
+        node = SinglyLinkedListNode(data)
+        self.prepend_node(node=node)
+
     def append(self, data: Any) -> None:
         node = SinglyLinkedListNode(data)
         self.append_node(node=node)
+
+    def insert(self, data: Any, index: int) -> None:
+        node = SinglyLinkedListNode(data)
+        self.insert_node(node=node, index=index)
+
+    def search(self, data: Any) -> bool:
+        return_value = False
+        if isinstance(data, SinglyLinkedListNode):
+            return_value = self.search_node(node=data, match_next=False)
+        else:
+            current = self.head
+            while current is not None:
+                if current.data == data:
+                    return_value = True
+                    break
+                current = current.next
+        return return_value
+
+    def reverse(self):
+        if self.head is self.tail:
+            pass
+        else:
+            first_node = self.head
+            second_node = first_node.next
+            third_node = second_node.next
+
+            while third_node is not None:
+                second_node.next = first_node
+
+                first_node = second_node
+                second_node = third_node
+                third_node = second_node.next
+
+            second_node.next = first_node
+            self.head, self.tail = self.tail, self.head
+
+            self.tail.next = None
 
     def pop(self) -> SinglyLinkedListNode:
         popped_node = None
