@@ -1,9 +1,20 @@
+""" This module has definition for all the nodes that were used in Linked Lists
+
+
+"""
 from __future__ import annotations
 
 from typing import Any
 
 
 class SinglyLinkedListNode:
+    """Class representing a Singly linked list Node
+
+    Raises:
+        ValueError: In setter method when you try to set next with something
+                    other than SinglyLinkedListNode
+
+    """
 
     __slots__ = ['_data', '_next']
 
