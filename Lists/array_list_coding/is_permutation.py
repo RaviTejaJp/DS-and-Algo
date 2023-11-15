@@ -1,3 +1,6 @@
+from __future__ import annotations
+
+
 def isPermutation(string1: str, string2: str) -> bool:
     """_summary_
 
@@ -22,4 +25,5 @@ def isPermutation(string1: str, string2: str) -> bool:
             return True
     return False
 
-print(isPermutation("RAILL","LIARR"))
+
+print(isPermutation('RAILL', 'LIARR'))

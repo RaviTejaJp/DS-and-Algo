@@ -1,4 +1,4 @@
-""" 
+"""
 [
     [1,2,3]    == [00,01,02]
     [4,5,6]    == [10,11,12]
@@ -14,11 +14,14 @@
 ]
 
 """
+from __future__ import annotations
+
 
 def rotate_matrix_90degrees(list_2d: list[list], count=1):
     rotaed_matrix = []
     for iter_count in range(count):
-        print(f"rotating original matrix by 90 degrees for : {iter_count} time")
+        print(
+            f'rotating original matrix by 90 degrees for : {iter_count} time')
         for row in range(len(list_2d)):
             temp_row = []
             for column in range(len(list_2d[0])):
@@ -27,6 +30,8 @@ def rotate_matrix_90degrees(list_2d: list[list], count=1):
             rotaed_matrix.append(temp_row)
     print(rotaed_matrix)
     return rotaed_matrix
+
+
 def rotate(matrix):
     result = []
     for row in range(len(matrix)):
@@ -37,8 +42,9 @@ def rotate(matrix):
     print(result)
     return result
 
+
 rotate([
-    [1,2,3],
-    [4,5,6],
-    [7,8,9]
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
 ])

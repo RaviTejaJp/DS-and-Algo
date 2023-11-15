@@ -1,24 +1,24 @@
 #   Created by Elshad Karimov
 #   Copyright © AppMillers. All rights reserved.
-
 #  Missing Number
+from __future__ import annotations
+import numpy as np
 
-my_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100]
+my_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50,
+           51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100]
 
 
 def missing_number(arr, n):
     # Calculate the sum of first n natural numbers
     total = n * (n + 1) // 2
-    
+
     # Calculate the sum of numbers in the array
     sum_arr = sum(arr)
-    
+
     # Find the missing number by subtracting sum_arr from total
     missing = total - sum_arr
-    
+
     return missing
-
-
 
 
 #  Find Pairs
@@ -32,30 +32,34 @@ def find_pairs(nums, target):
             elif nums[i] + nums[j] == target:
                 print(i, j)
 
-myList = [1,2,3,2,3,4,5,6]
+
+myList = [1, 2, 3, 2, 3, 4, 5, 6]
 find_pairs(myList, 6)
 
 # Leetcode answer
+
+
 def two_sum(nums, target):
     seen = {}
-    
+
     for i, num in enumerate(nums):
         complement = target - num
-        
+
         if complement in seen:
             return [seen[complement], i]
-        
+
         seen[num] = i
 
+
 # Find a number
-import numpy as np 
-my_array = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20])
+my_array = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+                    12, 13, 14, 15, 16, 17, 18, 19, 20])
+
 
 def find_number(array, number):
     for i in range(len(array)):
         if array[i] == number:
             print(i)
-
 
 
 # Find max product of two integer
@@ -77,6 +81,7 @@ def max_product(arr):
     # Return the product of the two largest numbers
     return max1 * max2  # O(1), constant time multiplication
 
+
 arr = [1, 7, 3, 4, 9, 5]
 print(max_product(arr))  # Output: 63 (9*7)
 
@@ -88,11 +93,14 @@ def middle(lst):
     # Return a new list containing all elements from the original list, excluding the first and last elements
     return lst[1:-1]
 
+
 my_list = [1, 2, 3, 4]
 
 print(middle(my_list))  # Output: [2, 3]
 
 # 2D List
+
+
 def diagonal_sum(matrix):
     # Initialize the sum to 0
     total = 0
@@ -105,6 +113,8 @@ def diagonal_sum(matrix):
     return total
 
 # Best Score
+
+
 def first_second(my_list):
     max1, max2 = float('-inf'), float('-inf')
 
@@ -117,10 +127,13 @@ def first_second(my_list):
 
     return max1, max2
 
+
 my_list = [84, 85, 86, 87, 85, 90, 85, 83, 23, 45, 84, 1, 2, 0]
 print(first_second(my_list))  # Output: (90, 87)
 
 # Duplicate Numbers
+
+
 def remove_duplicates(lst):
     unique_lst = []
     seen = set()
@@ -130,23 +143,29 @@ def remove_duplicates(lst):
             seen.add(item)
     return unique_lst
 
+
 my_list = [1, 1, 2, 2, 3, 4, 5]
 print(remove_duplicates(my_list))  # Output: [1, 2, 3, 4, 5]
 
 # Pairs
+
+
 def pair_sum(arr, target_sum):
     result = []
     for i in range(len(arr)):
         for j in range(i+1, len(arr)):
             if arr[i] + arr[j] == target_sum:
-                result.append(f"{arr[i]}+{arr[j]}")
+                result.append(f'{arr[i]}+{arr[j]}')
     return result
+
 
 arr = [2, 4, 3, 5, 6, -2, 4, 7, 8, 9]
 target_sum = 7
 print(pair_sum(arr, target_sum))  # Output: ['2+5', '4+3', '3+4', '-2+9']
 
 # Contains Duplicate
+
+
 def contains_duplicate(nums):
     seen = set()
     for num in nums:
@@ -155,22 +174,22 @@ def contains_duplicate(nums):
         seen.add(num)
     return False
 
+
 # Example usage
 nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1]
 print(contains_duplicates(nums))  # Output: True
 
 
-#Permutation
+# Permutation
 
 def permuntation(list1, list2):
     if len(list1) != len(list2):
         return False
     list1.sort()
     list2.sort()
-    if list1 == list2:  
+    if list1 == list2:
         return True
     return False
-
 
 
 # Rotate Matrix
