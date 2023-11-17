@@ -188,16 +188,25 @@ class SinglyLinkedList:
             )
 
     def prepend(self, data: Any) -> None:
-        node = SinglyLinkedListNode(data)
-        self.prepend_node(node=node)
+        if isinstance(data, SinglyLinkedList):
+            self.prepend_node(node=data)
+        else:
+            node = SinglyLinkedListNode(data)
+            self.prepend_node(node=node)
 
     def append(self, data: Any) -> None:
-        node = SinglyLinkedListNode(data)
-        self.append_node(node=node)
+        if isinstance(data, SinglyLinkedListNode):
+            self.append_node(node=data)
+        else:
+            node = SinglyLinkedListNode(data)
+            self.append_node(node=node)
 
     def insert(self, data: Any, index: int) -> None:
-        node = SinglyLinkedListNode(data)
-        self.insert_node(node=node, index=index)
+        if isinstance(data, SinglyLinkedListNode):
+            self.insert_node(node=data, index=index)
+        else:   
+            node = SinglyLinkedListNode(data)
+            self.insert_node(node=node, index=index)
 
     def search(self, data: Any) -> bool:
         return_value = False
@@ -291,7 +300,7 @@ class SinglyLinkedList:
         if index < 0:
             index = max(self.length + index, 0)
         if index > self.length:
-            index = self.length-1
+            index = self.length
         return index
 
     def __str__(self) -> str:
