@@ -7,7 +7,7 @@ from __future__ import annotations
 import warnings
 from typing import Any
 
-from nodes import SinglyLinkedListNode
+from .nodes import SinglyLinkedListNode
 
 __all__ = ['CircularSinglyLinkedList']
 

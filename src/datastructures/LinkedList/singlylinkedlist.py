@@ -7,7 +7,7 @@ from __future__ import annotations
 import warnings
 from typing import Any
 
-from nodes import SinglyLinkedListNode
+from .nodes import SinglyLinkedListNode
 
 __all__ = ['CircularSinglyLinkedList']
 
@@ -34,30 +34,30 @@ class SinglyLinkedList:
     Yields:
         _type_: _description_
     """
-    __slots__ = ['head', 'tail', 'length']
+    __slots__ = ['_head', '_tail', '_length']
 
     def __init__(self) -> None:
-        self.head = None
-        self.tail = None
-        self.length = 0
+        self._head = None
+        self._tail = None
+        self._length = 0
 
     @property
     def head(self) -> SinglyLinkedListNode | None:
-        return self.head
+        return self._head
 
     @property
     def tail(self) -> SinglyLinkedListNode | None:
-        return self.tail
+        return self._tail
 
     @property
     def length(self) -> int:
-        return self.length
+        return self._length
 
     # Setters
     @head.setter    # type: ignore[no-redef, attr-defined]
     def head(self, value: object) -> None:
         if isinstance(value, SinglyLinkedListNode) or value is None:
-            self.head = value
+            self._head = value
         else:
             raise TypeError(
                 f'Next value must be a SinglyLinkedListNode or None not'
@@ -67,7 +67,7 @@ class SinglyLinkedList:
     @tail.setter    # type: ignore[no-redef, attr-defined]
     def tail(self, value: object) -> None:
         if isinstance(value, SinglyLinkedListNode) or value is None:
-            self.tail = value
+            self._tail = value
         else:
             raise TypeError(
                 f'Next value must be a SinglyLinkedListNode or None not'
@@ -77,7 +77,7 @@ class SinglyLinkedList:
     @length.setter  # type: ignore[no-redef, attr-defined]
     def length(self, value: int) -> None:
         if isinstance(value, int):
-            self.length = value
+            self._length = value
         else:
             raise TypeError(f'Length should be a integer not {type(value)}')
 
