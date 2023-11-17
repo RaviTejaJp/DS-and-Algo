@@ -279,6 +279,9 @@ class SinglyLinkedList:
             self.length -= 1
         return popped_node
 
+    def remove(self, index: int) -> None:
+        _ = self.pop(index)
+
     def _handle_negative_index(self, index: int) -> int:
         # Condition to handle neg index < length
         # (smaller negative index than length)
