@@ -1,4 +1,4 @@
-import sys
-import os
+from .linkedlist import *
 
-sys.path.insert(0, os.path.dirname(__file__))
+# for k in dict(globals()).keys():
+#     print(k)
