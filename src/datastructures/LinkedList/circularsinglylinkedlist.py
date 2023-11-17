@@ -79,6 +79,73 @@ class CircularSinglyLinkedList:
                 "We can only append SinglyLinkedListNode to \
                 CircularSinglyLinkedList"
                 )
+    
+    def prepend_node(self, node: SinglyLinkedListNode) -> None:
+        if isinstance(node, SinglyLinkedListNode):
+            if self.head:
+                node.next = self.head
+                self.head = node
+                self.tail.next = self.head
+            else:
+                self.head = node
+                self.tail = node
+                self.tail.next = self.head
+            self.length += 1    
+        else:
+            raise TypeError(
+                f"we can only append SinglyLinkedListNode to"
+                "Circular Singly Linked list"
+            )
+
+    def insert_node(self, node: SinglyLinkedListNode, index: int) -> None:
+        if isinstance(index, int):
+            index = self._handle_negative_index(index)
+        else:
+            raise TypeError(
+                "Index must be an integer"
+            )
+
+        if isinstance(node, SinglyLinkedListNode):
+            if index == 0:
+                self.prepend(node)
+            elif index == self.length:
+                self.append(node)
+            else:
+                current_pos = 0
+                current_node = self.head
+                while current_pos < index-1 and current_node is not None:
+                    current_node = current_node.next
+                    current_pos += 1
+                node.next = current_node.next
+                current_node.next = node
+                self.length += 1
+        else:
+            raise TypeError(
+                f"we can only insert SinglyLinkedListNode to"
+                "Circular Singly Linked list"
+            )
+
+
+    def append(self, value: Any) -> None:
+        if isinstance(value, SinglyLinkedListNode):
+            self.append_node(value)
+        else:
+            self.append_node(SinglyLinkedListNode(value))
+
+
+    def prepend(self, value: Any) -> None:
+        if isinstance(value, SinglyLinkedListNode):
+            self.prepend_node(value)
+        else:
+            self.prepend_node(SinglyLinkedListNode(value))
+
+    def insert(self, value: Any, index: int) -> None:
+        if isinstance(value, SinglyLinkedListNode):
+            self.insert_node(value, index)
+        else:
+            self.insert_node(SinglyLinkedListNode(value), index)
+
+
 
     def _handle_negative_index(self, index: int) -> int:
         # Condition to handle neg index < length
@@ -88,7 +155,7 @@ class CircularSinglyLinkedList:
         if index < 0:
             index = max(self.length + index, 0)
         if index > self.length:
-            index = self.length-1
+            index = self.length
         return index
 
     def __str__(self) -> str:
