@@ -3,7 +3,8 @@
 """
 import unittest
 
-from DS_and_Algo.DataStructures.LinkedList.nodes import SinglyLinkedListNode
+from src.datastructures.linkedlist.nodes import SinglyLinkedListNode
+from src.datastructures.linkedlist.circularsinglylinkedlist import CircularSinglyLinkedList
 
 
 class TestCircularLinkedList(unittest.TestCase):
