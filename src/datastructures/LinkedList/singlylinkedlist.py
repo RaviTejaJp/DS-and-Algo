@@ -9,7 +9,8 @@ from typing import Any
 
 from nodes import SinglyLinkedListNode
 
-__all__ = ['SinglyLinkedList']
+__all__ = ['CircularSinglyLinkedList']
+
 
 
 class SinglyLinkedList:
@@ -290,7 +291,7 @@ class SinglyLinkedList:
         if index < 0:
             index = max(self.length + index, 0)
         if index > self.length:
-            index = min(self.length, index)
+            index = self.length-1
         return index
 
     def __str__(self) -> str:
