@@ -125,6 +125,77 @@ class CircularSinglyLinkedList:
                 "Circular Singly Linked list"
             )
 
+    def pop_value(self, value: Any) -> SinglyLinkedListNode | None:
+        current: SinglyLinkedListNode = self.head
+        popped_node: SinglyLinkedListNode = None
+        if current is None:
+            pass
+        else:
+            prev: SinglyLinkedListNode = None
+            while current:
+                if current.data == value:
+                    if current is self.head:
+                        popped_node = self.head
+                        if current.next is self.head:
+                            self.head.next = None
+                            self.head = None
+                            self.tail = None
+                        else:
+                            self.head = popped_node.next
+                            self.tail.next = self.head
+                            popped_node.next = None
+                    elif current is self.tail:
+                        prev.next = self.head
+                        self.tail.next = None
+                        popped_node = self.tail
+                        self.tail = prev
+                    else:
+                        prev.next = current.next
+                        current.next = None
+                        popped_node = current
+                    self.length -= 1
+                    break
+                else:
+                    prev = current
+                    current = current.next
+                    if current == self.head:
+                        break
+        return popped_node
+
+
+    def pop_first(self) -> SinglyLinkedListNode | None:
+        current : SinglyLinkedListNode = self.head
+        popped_node : SinglyLinkedListNode = self.head
+        
+        if current:
+            if self.head is self.tail:
+                self.head = None
+                self.tail = None
+            else:
+                self.head = popped_node.next
+                self.tail.next = self.head
+            self.length -= 1
+        return popped_node
+
+
+    def pop(self) -> SinglyLinkedListNode | None:
+        current: SinglyLinkedListNode = self.head
+        popped_node: SinglyLinkedListNode = None
+        if current:
+            if self.head is self.tail:
+                popped_node = self.tail
+                self.head = None
+                self.tail = None
+            else:
+                while current.next != self.tail:
+                    current = current.next
+                popped_node = self.tail
+                current.next = self.head
+                self.tail = current
+                popped_node.next = None
+            self.length -= 1
+        return popped_node
+
 
     def append(self, value: Any) -> None:
         if isinstance(value, SinglyLinkedListNode):
@@ -145,7 +216,27 @@ class CircularSinglyLinkedList:
         else:
             self.insert_node(SinglyLinkedListNode(value), index)
 
-
+    def traverse(self):
+        current = self.head
+        while current:
+            print(f"{current.data}", end= " -> ")
+            current = current.next
+            if current is self.head:
+                print("Done")
+                break
+    
+    def search(self, data: Any) -> bool:
+        current = self.head
+        result: bool = False
+        while current:
+            if current.data == data:
+                result = True
+                break
+            else:
+                current = current.next
+                if current is self.head:
+                    break
+        return result
 
     def _handle_negative_index(self, index: int) -> int:
         # Condition to handle neg index < length
@@ -185,3 +276,45 @@ class CircularSinglyLinkedList:
             current = current.next
             if current is self.head:
                 break
+    
+    def __getitem__(self, index: int) -> Any:
+        if isinstance(index, int):
+            index = self._handle_negative_index(index)
+            if index >= self.length:
+                raise IndexError(
+                    "Linked List index out of range"
+                )
+            current = self.head
+            pos = 0
+            while current:
+                if pos == index:
+                    return current.data
+                else:
+                    current = current.next
+                    pos += 1
+            return None
+        else:
+            raise TypeError(
+                "Index must be an integer"
+            )
+    
+    
+    def __setitem__(self, index: int, value: Any) -> None:
+        if isinstance(index, int):
+            index = self._handle_negative_index(index)
+            if index >= self.length:
+                raise IndexError(
+                    "Linked List assignment index out of range"
+                )
+            current = self.head
+            pos = 0
+            while current:
+                if pos == index:
+                    current.data = value
+                    break
+                current = current.next
+                pos += 1
+        else:
+            raise TypeError(
+                "Index must be an integer"
+            )

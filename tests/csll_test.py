@@ -74,7 +74,8 @@ class CircularLinkedListTest(unittest.TestCase):
         self.assertListEqual(self.cll.to_list(), [7,2,3,6,1,5,4,8,9])
 
 
-    def test_insert_cll(self):
+    def test_insert_search_traverse_cll(self):
+        self.cll.traverse()
         self.cll.append(1)
         
         self.cll.insert(2,0)
@@ -100,6 +101,103 @@ class CircularLinkedListTest(unittest.TestCase):
 
         self.cll.insert(9,8)
         self.assertListEqual(self.cll.to_list(), [7,2,3,6,1,5,4,8,9])
+        
+        self.cll.traverse()
+        
+        self.assertTrue(self.cll.search(9))
+        self.assertFalse(self.cll.search(10))
+    
+    def test_getter(self):
+        with self.assertRaises(IndexError):
+            self.cll[0]
+        
+        self.cll.append(1)
+        self.assertEqual(self.cll[0],1)
+        self.assertEqual(self.cll[-1],1)
+        with self.assertRaises(IndexError):
+            self.assertEqual(self.cll[1],1)
+            self.assertEqual(self.cll[-2],1)
+        
+        self.cll.append(2)
+        self.assertEqual(self.cll[0],1)
+        self.assertEqual(self.cll[-2],1)
+        
+        self.assertEqual(self.cll[-1],2)
+        self.assertEqual(self.cll[1],2)
+        
+        
+        with self.assertRaises(IndexError):
+            self.assertEqual(self.cll[2],2)
+            self.assertEqual(self.cll[-3],1)
+        
+    def test_setter(self):
+        with self.assertRaises(IndexError):
+            self.cll[0] = 1
+        self.cll.append(1)
+        self.assertEqual(self.cll[0],1)
+        self.cll[0] = 100
+        self.assertEqual(self.cll[0],100)
+
+        with self.assertRaises(IndexError):
+            self.cll[1] = 1
+    
+    def test_pop_value(self):
+        self.cll.append(1)
+        self.cll.append(2)
+        self.cll.append(3)
+        self.cll.append(4)
+        
+        self.assertListEqual(self.cll.to_list(), [1,2,3,4])
+        self.cll.pop_value(5)
+        self.assertListEqual(self.cll.to_list(), [1,2,3,4])
+        self.cll.pop_value(3)
+        self.assertListEqual(self.cll.to_list(), [1,2,4])
+        self.cll.pop_value(1)
+        self.assertListEqual(self.cll.to_list(), [2,4])
+        self.cll.pop_value(4)
+        self.assertListEqual(self.cll.to_list(), [2])
+        self.cll.pop_value(2)
+        self.assertListEqual(self.cll.to_list(), [])
+        self.cll.pop_value(2)
+        self.assertListEqual(self.cll.to_list(), [])
+
+
+    def test_pop_first(self):
+        self.cll.append(1)
+        self.cll.append(2)
+        self.cll.append(3)
+        self.cll.append(4)
+
+        self.assertListEqual(self.cll.to_list(), [1,2,3,4])
+        self.cll.pop_first()
+        self.assertListEqual(self.cll.to_list(), [2,3,4])
+        self.cll.pop_first()
+        self.assertListEqual(self.cll.to_list(), [3,4])
+        self.cll.pop_first()
+        self.assertListEqual(self.cll.to_list(), [4])
+        self.cll.pop_first()
+        self.assertListEqual(self.cll.to_list(), [])
+        self.cll.pop_first()
+        self.assertListEqual(self.cll.to_list(), [])
+
+    def test_pop(self):
+        self.cll.append(1)
+        self.cll.append(2)
+        self.cll.append(3)
+        self.cll.append(4)
+
+        self.assertListEqual(self.cll.to_list(), [1,2,3,4])
+        self.cll.pop()
+        self.assertListEqual(self.cll.to_list(), [1,2,3])
+        self.cll.pop()
+        self.assertListEqual(self.cll.to_list(), [1,2])
+        self.cll.pop()
+        self.assertListEqual(self.cll.to_list(), [1])
+        self.cll.pop()
+        self.assertListEqual(self.cll.to_list(), [])
+        self.cll.pop()
+        self.assertListEqual(self.cll.to_list(), [])
+
 
 
 if __name__ == '__main__':
