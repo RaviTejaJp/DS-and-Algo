@@ -4,7 +4,22 @@
 """
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Type
+from functools import wraps
+
+def type_check(param_name: str, expected_type: Type):
+    def decorator(func):
+        @wraps(func)
+        def wrapper(self, node):
+            if not isinstance(node, expected_type):
+                raise TypeError(
+                    f"The '{param_name}' parameter must be an instance of "
+                    f"{expected_type.__name__}"
+                    )
+            return func(self, node)
+        return wrapper
+    return decorator
+
 
 
 class SinglyLinkedListNode:

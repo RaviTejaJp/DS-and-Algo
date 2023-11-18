@@ -7,7 +7,7 @@ from __future__ import annotations
 import warnings
 from typing import Any
 
-from .nodes import DoublyLinkedListNode
+from .nodes import DoublyLinkedListNode, type_check
 
 __all__ = ['DoublySinglyLinkedList']
 
@@ -37,7 +37,7 @@ class DoublyLinkedList:
     # Setters
     @head.setter    # type: ignore[no-redef, attr-defined]
     def head(self, value: object) -> None:
-        if isinstance(value, DoublyLinkedList) or value is None:
+        if isinstance(value, DoublyLinkedListNode) or value is None:
             self._head = value
         else:
             raise TypeError(
@@ -47,7 +47,7 @@ class DoublyLinkedList:
 
     @tail.setter    # type: ignore[no-redef, attr-defined]
     def tail(self, value: object) -> None:
-        if isinstance(value, DoublyLinkedList) or value is None:
+        if isinstance(value, DoublyLinkedListNode) or value is None:
             self._tail = value
         else:
             raise TypeError(
@@ -66,6 +66,7 @@ class DoublyLinkedList:
     def to_list(self):
         return list(self)
     
+    @type_check('node', DoublyLinkedListNode)
     def append_node(self, node: DoublyLinkedListNode) -> None:
         if self.head is None:
             node.prev = None
@@ -78,12 +79,34 @@ class DoublyLinkedList:
             self.tail = node
             node.next = None
         self.length += 1
+
+
+    @type_check('node',DoublyLinkedListNode)
+    def prepend_node(self, node: DoublyLinkedListNode) -> None:
+        if self.head is None:
+            node.prev = None
+            node.next = None
+            self.head = node
+            self.tail = node
+        else:
+            node.prev = None
+            node.next = self.head
+            self.head.prev = node
+            self.head = node
+        self.length += 1
+
     
     def append(self, value: Any) -> None:
         if isinstance(value,DoublyLinkedListNode):
             self.append_node(value)
         else:
             self.append_node(DoublyLinkedListNode(value))
+    
+    def prepend(self, value: Any) -> None:
+        if isinstance(value,DoublyLinkedListNode):
+            self.prepend_node(value)
+        else:
+            self.prepend_node(DoublyLinkedListNode(value))
     
     def __iter__(self):
         current = self.head
