@@ -1,4 +1,4 @@
-"""Test Cases for Circular linked lists
+"""Test Cases for Singly linked lists
 
 """
 import sys

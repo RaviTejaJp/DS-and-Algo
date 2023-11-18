@@ -9,7 +9,7 @@ from typing import Any
 
 from .nodes import SinglyLinkedListNode
 
-__all__ = ['CircularSinglyLinkedList']
+__all__ = ['SinglyLinkedList']
 
 
 
