@@ -59,6 +59,7 @@ class CircularSinglyLinkedList:
         return list(self)
 
     def clear(self) -> None:
+        self.tail.next = None
         self.head = None
         self.tail = None
         self.length = 0
