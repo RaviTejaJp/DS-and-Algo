@@ -7,32 +7,19 @@ from __future__ import annotations
 from typing import Any, Type
 from functools import wraps
 
-def type_check(param_name: str, expected_type: Type):
-    def decorator(func):
-        @wraps(func)
-        def wrapper(self, node):
-            if not isinstance(node, expected_type):
-                raise TypeError(
-                    f"The '{param_name}' parameter must be an instance of "
-                    f"{expected_type.__name__}"
-                    )
-            return func(self, node)
-        return wrapper
-    return decorator
-
 def generic_type_check(*param_check_args:tuple,**param_check_kwargs:dict):
     def decorator(func):
         @wraps(func)
         def wrapper(*args,**kwargs):
-            if param_check_args and args:
-                for item, item_type in zip(args[1:], param_check_args):
-                    if isinstance(item, item_type):
-                        pass
-                    else:
-                        raise TypeError(
-                            f"Expected '{param_check_args}' but got {type(item_type)}"
-                            f" in positional arguments"
-                            )
+            # NOTE: args[1:] is written because first argument is always self
+            for item, item_type in zip(args[1:], param_check_args):
+                if isinstance(item, item_type):
+                    pass
+                else:
+                    raise TypeError(
+                        f"Expected '{param_check_args}' but got {type(item_type)}"
+                        f" in positional arguments"
+                        )
             for param_name, expected_type in param_check_kwargs.items():
                 if param_name in kwargs:
                     param_value = kwargs[param_name]
