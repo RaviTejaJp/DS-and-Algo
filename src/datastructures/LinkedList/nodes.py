@@ -20,6 +20,33 @@ def type_check(param_name: str, expected_type: Type):
         return wrapper
     return decorator
 
+def generic_type_check(*param_check_args:tuple,**param_check_kwargs:dict):
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args,**kwargs):
+            if param_check_args and args:
+                for item, item_type in zip(args[1:], param_check_args):
+                    if isinstance(item, item_type):
+                        pass
+                    else:
+                        raise TypeError(
+                            f"Expected '{param_check_args}' but got {type(item_type)}"
+                            f" in positional arguments"
+                            )
+            for param_name, expected_type in param_check_kwargs.items():
+                if param_name in kwargs:
+                    param_value = kwargs[param_name]
+                    if not isinstance(param_value, expected_type):
+                        raise TypeError(
+                            f"Error in {func.__name__}: "
+                            f"The '{param_name}' parameter must be an instance"
+                            f"of {expected_type.__name__}" 
+                            f"got {type(param_value).__name__}"
+                            )
+            return func(*args,**kwargs)
+        return wrapper
+    return decorator
+
 
 
 class SinglyLinkedListNode:

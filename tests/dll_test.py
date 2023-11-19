@@ -45,6 +45,33 @@ class DoublyLinkedListTest(unittest.TestCase):
         self.dll.prepend(4)
         self.assertListEqual(self.dll.to_list(), [4,3,2,1])
 
+    def test_insert_node_dll(self):
+        self.dll.append_node(DoublyLinkedListNode(1))
+        
+        self.dll.insert_node(DoublyLinkedListNode(2),0)
+        self.assertListEqual(self.dll.to_list(), [2,1])
+        
+        self.dll.insert_node(DoublyLinkedListNode(3),index=1)
+        self.assertListEqual(self.dll.to_list(), [2,3,1])
+        
+        self.dll.insert_node(DoublyLinkedListNode(4),3)
+        self.assertListEqual(self.dll.to_list(), [2,3,1,4])
+        
+        self.dll.insert_node(DoublyLinkedListNode(5),-1)
+        self.assertListEqual(self.dll.to_list(), [2,3,1,5,4])
+        
+        self.dll.insert_node(DoublyLinkedListNode(6),-3)
+        self.assertListEqual(self.dll.to_list(), [2,3,6,1,5,4])
+        
+        self.dll.insert_node(DoublyLinkedListNode(7),-10)
+        self.assertListEqual(self.dll.to_list(), [7,2,3,6,1,5,4])
+    
+        self.dll.insert_node(DoublyLinkedListNode(8),10)
+        self.assertListEqual(self.dll.to_list(), [7,2,3,6,1,5,4,8])
+
+        self.dll.insert_node(DoublyLinkedListNode(9),8)
+        self.assertListEqual(self.dll.to_list(), [7,2,3,6,1,5,4,8,9])
+
 
 
 if __name__ == '__main__':

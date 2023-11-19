@@ -5,9 +5,9 @@
 from __future__ import annotations
 
 import warnings
-from typing import Any
+from typing import Any, Optional
 
-from .nodes import DoublyLinkedListNode, type_check
+from .nodes import DoublyLinkedListNode, type_check, generic_type_check
 
 __all__ = ['DoublySinglyLinkedList']
 
@@ -66,7 +66,7 @@ class DoublyLinkedList:
     def to_list(self):
         return list(self)
     
-    @type_check('node', DoublyLinkedListNode)
+    @generic_type_check(DoublyLinkedListNode,node=DoublyLinkedListNode)
     def append_node(self, node: DoublyLinkedListNode) -> None:
         if self.head is None:
             node.prev = None
@@ -81,7 +81,7 @@ class DoublyLinkedList:
         self.length += 1
 
 
-    @type_check('node',DoublyLinkedListNode)
+    @generic_type_check(DoublyLinkedListNode,node=DoublyLinkedListNode)
     def prepend_node(self, node: DoublyLinkedListNode) -> None:
         if self.head is None:
             node.prev = None
@@ -95,18 +95,53 @@ class DoublyLinkedList:
             self.head = node
         self.length += 1
 
+    @generic_type_check(DoublyLinkedListNode,int,node=DoublyLinkedListNode,index=int)
+    def insert_node(self, node: DoublyLinkedList, index: int) -> None:
+        index = self._handle_negative_index(index=index)
+        if index == 0:
+            self.prepend_node(node=node)
+        elif index == self.length:
+            self.append_node(node=node)
+        else:
+            current_pos = 0
+            current = self.head
+            while current_pos < index:
+                current_pos += 1
+                current = current.next
+            
+            node.prev = current.prev
+            node.next = current
+            
+            current.prev = node
+            node.prev.next = node
+            self.length += 1
     
     def append(self, value: Any) -> None:
         if isinstance(value,DoublyLinkedListNode):
-            self.append_node(value)
+            self.append_node(node=value)
         else:
-            self.append_node(DoublyLinkedListNode(value))
+            self.append_node(node=DoublyLinkedListNode(value))
     
     def prepend(self, value: Any) -> None:
         if isinstance(value,DoublyLinkedListNode):
-            self.prepend_node(value)
+            self.prepend_node(node= value)
         else:
-            self.prepend_node(DoublyLinkedListNode(value))
+            self.prepend_node(node= DoublyLinkedListNode(value))
+    
+    def insert(self, value: Any, index: int) -> None:
+        if isinstance(value,DoublyLinkedListNode):
+            self.insert_node(node=value, index=index)
+        else:
+            self.insert_node(node=DoublyLinkedListNode(value), index=index)
+    
+    
+    @generic_type_check(int,index=int)
+    def _handle_negative_index(self, index:int) -> int:
+        if index < 0:
+            index = max(0, index + self.length)
+        if index > self.length:
+            index = self.length
+        return index
     
     def __iter__(self):
         current = self.head
