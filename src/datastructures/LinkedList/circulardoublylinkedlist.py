@@ -199,6 +199,18 @@ class CircularDoublyLinkedList:
     def to_list(self):
         return list(self)
     
+    def clear(self):
+        current = self.head
+        while current:
+            current.prev = None
+            current = current.next
+            if current is self.head:
+                break
+        self.tail.next = None
+        self.head = None
+        self.tail = None
+        self.length = 0
+    
     def __iter__(self):
         current = self.head
         while current:
