@@ -95,6 +95,12 @@ class CircularDoublyLinkedListTest(unittest.TestCase):
         self.cdll.delete(3)
         self.assertListEqual(self.cdll.to_list(), [])
 
+    def test_clear_cdll(self):
+        self.cdll.prepend_node(DoublyLinkedListNode(1))
+        self.cdll.prepend_node(DoublyLinkedListNode(2))
+        self.cdll.prepend_node(DoublyLinkedListNode(3))
+        self.cdll.clear()
+        self.assertListEqual(self.cdll.to_list(), [])
 
 if __name__ == '__main__':
     unittest.main()

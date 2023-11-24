@@ -106,7 +106,7 @@ class CircularLinkedListTest(unittest.TestCase):
         
         self.assertTrue(self.cll.search(9))
         self.assertFalse(self.cll.search(10))
-    
+
     def test_getter(self):
         with self.assertRaises(IndexError):
             self.cll[0]
