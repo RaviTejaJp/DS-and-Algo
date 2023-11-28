@@ -22,15 +22,18 @@ def solution(equation: str) -> bool:
     for char in equation:
         if char in map:
             temp = None
-            eq_length = 0
+            operator_flag = False
             while temp != map[char]:
                 if stack:
-                    eq_length += 1
                     temp = stack.pop()
+                    if temp in '+-*/%^':
+                        operator_flag = True
                 else:
                     print(stack)
                     return 'Not Valid Parenthesis Equation'
-            if eq_length == 1:
+            if operator_flag:
+                pass
+            else:
                 return True
         else:
             stack.append(char)
@@ -44,6 +47,7 @@ inputs = []
 inputs.append('((a+b))')
 inputs.append('((a+b)')
 inputs.append('{[(a+b) + c]+d}+e')
+inputs.append('((a+b)+(c))')
 
 for input in inputs:
     print(f"Redundant Parenthesis present in '{input}' -- {solution(input)}")
