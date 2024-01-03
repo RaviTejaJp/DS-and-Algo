@@ -73,7 +73,30 @@ class CircularQueueTest(unittest.TestCase):
         self.cq.enqueue(1)
         self.assertListEqual(list(self.cq), [2,3,4,5,1])
 
-
+class LLQueueTest(unittest.TestCase):
+    def setUp(self):
+        self.llq = LLQueue()
+    
+    def test_empty_circular_queue(self):
+        self.assertTrue(self.llq.isEmpty())
+    
+    def test_enqueue_dequeue_cq(self):
+        self.llq.enqueue(1)
+        self.assertFalse(self.llq.isEmpty())
+        self.assertEqual(self.llq.dequeue(),1)
+        self.assertTrue(self.llq.isEmpty())
+        self.llq.enqueue(1)
+        self.llq.enqueue(2)
+        self.llq.enqueue(3)
+        self.llq.enqueue(4)
+        self.llq.enqueue(5)
+        self.llq.dequeue()
+        self.llq.enqueue(1)
+        self.assertListEqual(list(self.llq), [2,3,4,5,1])
+        self.assertEqual(self.llq.peek(),2)
+        self.llq.delete()
+        self.assertTrue(self.llq.isEmpty())
+        self.assertListEqual(list(self.llq), [])
 
 
 
